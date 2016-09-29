@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>APS 240: Data Analysis and Statistics with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield">
+  <meta name="generator" content="bookdown 0.1.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="APS 240: Data Analysis and Statistics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  <meta name="github-repo" content="dzchilds/stats-for-bio" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="APS 240: Data Analysis and Statistics with R" />
+  
+  <meta name="twitter:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  
+
+<meta name="author" content="Dylan Z. Childs">
+
+<meta name="date" content="2016-09-28">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="comparing-populations.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<style type="text/css">
+
+.warning-box {
+  border: 3px solid #e60000;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.advanced-box {
+  border: 3px solid #268bd2;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.do-something {
+  border: 3px solid #803e00;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+</style>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">APS 240</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course information and overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#why-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Why do a data analysis course?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.2</b> Course overview</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#aims"><i class="fa fa-check"></i><b>1.2.1</b> Aims</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#objectives"><i class="fa fa-check"></i><b>1.2.2</b> Objectives</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#assumed-background"><i class="fa fa-check"></i><b>1.2.3</b> Assumed background</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#methods"><i class="fa fa-check"></i><b>1.2.4</b> Methods</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#non-assessed-material"><i class="fa fa-check"></i><b>1.2.5</b> Non-assessed material</a></li>
+<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#what-is-required-of-you"><i class="fa fa-check"></i><b>1.2.6</b> What is required of you?</a></li>
+<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i><b>1.2.7</b> Assessment</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#how-to-use-the-teaching-material"><i class="fa fa-check"></i><b>1.3</b> How to use the teaching material</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.1</b> The online course book</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.2</b> Printed material</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#how-to-make-best-use-of-it"><i class="fa fa-check"></i><b>1.3.3</b> How to make best use of the teaching material</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>1.3.4</b> Conventions used in the course material</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#feedback"><i class="fa fa-check"></i><b>1.3.5</b> Feedback</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#help"><i class="fa fa-check"></i><b>1.3.6</b> Help sessions</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#overall"><i class="fa fa-check"></i><b>1.3.7</b> Overall…</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#health-and-safety"><i class="fa fa-check"></i><b>1.4</b> Health and safety using display screen equipment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html"><i class="fa fa-check"></i><b>2</b> Expected learning outcomes</a><ul>
+<li class="chapter" data-level="2.1" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html#statistical-concepts-i"><i class="fa fa-check"></i><b>2.1</b> Statistical Concepts (I)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html"><i class="fa fa-check"></i><b>3</b> Programming prerequisites</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#starting-an-r-session-in-rstudio"><i class="fa fa-check"></i><b>3.1</b> Starting an R session in RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#using-packages"><i class="fa fa-check"></i><b>3.2</b> Using packages</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#reading-data-into-r"><i class="fa fa-check"></i><b>3.3</b> Reading data into R</a></li>
+<li class="chapter" data-level="3.4" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#data-frames"><i class="fa fa-check"></i><b>3.4</b> Data frames</a></li>
+<li class="chapter" data-level="3.5" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#package-functions"><i class="fa fa-check"></i><b>3.5</b> Package functions</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (I)</b></span></li>
+<li class="chapter" data-level="4" data-path="the-scientific-process.html"><a href="the-scientific-process.html"><i class="fa fa-check"></i><b>4</b> The scientific process</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#stages"><i class="fa fa-check"></i><b>4.1</b> Stages in the scientific process</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#observations"><i class="fa fa-check"></i><b>4.1.1</b> Observations</a></li>
+<li class="chapter" data-level="4.1.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#questions"><i class="fa fa-check"></i><b>4.1.2</b> Questions</a></li>
+<li class="chapter" data-level="4.1.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypotheses"><i class="fa fa-check"></i><b>4.1.3</b> Hypotheses</a></li>
+<li class="chapter" data-level="4.1.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#predictions"><i class="fa fa-check"></i><b>4.1.4</b> Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="4.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#are-we-sure"><i class="fa fa-check"></i><b>4.3</b> Don’t we ever know anything for sure?</a></li>
+<li class="chapter" data-level="4.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#further-reading"><i class="fa fa-check"></i><b>4.4</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-and-variables.html"><a href="data-and-variables.html"><i class="fa fa-check"></i><b>5</b> Data and variables</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-and-variables.html"><a href="data-and-variables.html#observations-on-material-and-obvious-things"><i class="fa fa-check"></i><b>5.1</b> “Observations on material and obvious things”</a></li>
+<li class="chapter" data-level="5.2" data-path="data-and-variables.html"><a href="data-and-variables.html#var-types"><i class="fa fa-check"></i><b>5.2</b> Revision: Types of variable</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-and-variables.html"><a href="data-and-variables.html#nominal-categorical-variables"><i class="fa fa-check"></i><b>5.2.1</b> Nominal (categorical) variables</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-and-variables.html"><a href="data-and-variables.html#ordinal-categorical-data"><i class="fa fa-check"></i><b>5.2.2</b> Ordinal (categorical) data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-and-variables.html"><a href="data-and-variables.html#interval-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.3</b> Interval scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-and-variables.html"><a href="data-and-variables.html#ratio-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.4</b> Ratio scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.5" data-path="data-and-variables.html"><a href="data-and-variables.html#which-is-best"><i class="fa fa-check"></i><b>5.2.5</b> Which is best?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-and-variables.html"><a href="data-and-variables.html#accuracy-precision"><i class="fa fa-check"></i><b>5.3</b> Accuracy and precision</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-and-variables.html"><a href="data-and-variables.html#what-do-they-mean"><i class="fa fa-check"></i><b>5.3.1</b> What do they mean?</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-and-variables.html"><a href="data-and-variables.html#implied-precision---significant-figures"><i class="fa fa-check"></i><b>5.3.2</b> Implied precision - significant figures</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-and-variables.html"><a href="data-and-variables.html#how-precise-should-measurements-be"><i class="fa fa-check"></i><b>5.3.3</b> How precise should measurements be?</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-and-variables.html"><a href="data-and-variables.html#error-bias-and-prejudice"><i class="fa fa-check"></i><b>5.3.4</b> Error, bias and prejudice</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="learning-from-data.html"><a href="learning-from-data.html"><i class="fa fa-check"></i><b>6</b> Learning from data</a><ul>
+<li class="chapter" data-level="6.1" data-path="learning-from-data.html"><a href="learning-from-data.html#populations"><i class="fa fa-check"></i><b>6.1</b> Populations</a></li>
+<li class="chapter" data-level="6.2" data-path="learning-from-data.html"><a href="learning-from-data.html#learning-about-populations"><i class="fa fa-check"></i><b>6.2</b> Learning about populations</a></li>
+<li class="chapter" data-level="6.3" data-path="learning-from-data.html"><a href="learning-from-data.html#morph-example"><i class="fa fa-check"></i><b>6.3</b> A simple example</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sampling-error.html"><a href="sampling-error.html"><i class="fa fa-check"></i><b>7</b> Sampling error</a><ul>
+<li class="chapter" data-level="7.1" data-path="sampling-error.html"><a href="sampling-error.html#sampling-error-1"><i class="fa fa-check"></i><b>7.1</b> Sampling error</a></li>
+<li class="chapter" data-level="7.2" data-path="sampling-error.html"><a href="sampling-error.html#sampling-distributions"><i class="fa fa-check"></i><b>7.2</b> Sampling distributions</a></li>
+<li class="chapter" data-level="7.3" data-path="sampling-error.html"><a href="sampling-error.html#the-effect-of-sample-size"><i class="fa fa-check"></i><b>7.3</b> The effect of sample size</a></li>
+<li class="chapter" data-level="7.4" data-path="sampling-error.html"><a href="sampling-error.html#the-standard-error"><i class="fa fa-check"></i><b>7.4</b> The standard error</a></li>
+<li class="chapter" data-level="7.5" data-path="sampling-error.html"><a href="sampling-error.html#what-is-the-point-of-all-this"><i class="fa fa-check"></i><b>7.5</b> What is the point of all this!?</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (II)</b></span></li>
+<li class="chapter" data-level="8" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html"><i class="fa fa-check"></i><b>8</b> Statistical significance and <em>p</em>-values</a><ul>
+<li class="chapter" data-level="8.1" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#bootstrap"><i class="fa fa-check"></i><b>8.1</b> Estimating a sampling distribution</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#bootstrap-overview"><i class="fa fa-check"></i><b>8.1.1</b> Overviw of bootstrapping</a></li>
+<li class="chapter" data-level="8.1.2" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#doing-it-for-real"><i class="fa fa-check"></i><b>8.1.2</b> Doing it for real</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#statistical-significance"><i class="fa fa-check"></i><b>8.2</b> Statistical significance</a></li>
+<li class="chapter" data-level="8.3" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#concluding-words"><i class="fa fa-check"></i><b>8.3</b> Concluding words</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="comparing-populations.html"><a href="comparing-populations.html"><i class="fa fa-check"></i><b>9</b> Comparing populations</a><ul>
+<li class="chapter" data-level="9.1" data-path="comparing-populations.html"><a href="comparing-populations.html#making-comparisons"><i class="fa fa-check"></i><b>9.1</b> Making comparisons</a></li>
+<li class="chapter" data-level="9.2" data-path="comparing-populations.html"><a href="comparing-populations.html#morph-weights-eg"><i class="fa fa-check"></i><b>9.2</b> A new example</a></li>
+<li class="chapter" data-level="9.3" data-path="comparing-populations.html"><a href="comparing-populations.html#evaluating-differences"><i class="fa fa-check"></i><b>9.3</b> Evaluating differences</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="comparing-populations.html"><a href="comparing-populations.html#statistical-significance-again"><i class="fa fa-check"></i><b>9.3.1</b> Statistical significance (again)</a></li>
+<li class="chapter" data-level="9.3.2" data-path="comparing-populations.html"><a href="comparing-populations.html#a-permutation-test"><i class="fa fa-check"></i><b>9.3.2</b> A permutation test</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="comparing-populations.html"><a href="comparing-populations.html#what-have-we-learned"><i class="fa fa-check"></i><b>9.4</b> What have we learned?</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="concluding-remarks.html"><a href="concluding-remarks.html"><i class="fa fa-check"></i><b>10</b> Concluding remarks</a><ul>
+<li class="chapter" data-level="10.1" data-path="concluding-remarks.html"><a href="concluding-remarks.html#a-few-words-about-the-null-hypothesis"><i class="fa fa-check"></i><b>10.1</b> A few words about the null hypothesis</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="concluding-remarks.html"><a href="concluding-remarks.html#hypotheses-and-null-hypotheses"><i class="fa fa-check"></i><b>10.1.1</b> Hypotheses and null hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="concluding-remarks.html"><a href="concluding-remarks.html#a-few-words-about-p-values"><i class="fa fa-check"></i><b>10.2</b> A few words about <em>p</em> values</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="concluding-remarks.html"><a href="concluding-remarks.html#what-if-is-close-to-0.05"><i class="fa fa-check"></i><b>10.2.1</b> What if is close to 0.05?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="concluding-remarks.html"><a href="concluding-remarks.html#biological-vs.statistical-significance"><i class="fa fa-check"></i><b>10.2.2</b> Biological vs. statistical significance</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Evaluating Associations</b></span></li>
+<li class="part"><span><b>Comparing Means</b></span></li>
+<li class="part"><span><b>Experimental Design</b></span></li>
+<li class="part"><span><b>Miscellaneous Topics</b></span></li>
+<li class="appendix"><span><b>Supplementary Material</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">APS 240: Data Analysis and Statistics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="concluding-remarks" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Concluding remarks</h1>
+<div id="a-few-words-about-the-null-hypothesis" class="section level2">
+<h2><span class="header-section-number">10.1</span> A few words about the null hypothesis</h2>
+<p>When using frequentist statistics we are always asking what would happen if we continually sampled from a population <em>where the effect we are interested in is not present</em>. This idea of a hypothetical ‘no effect’ situation is so important that it has a special name; it is called <strong>the null hypothesis</strong>. Every kind of statistical test (in this course at least) has a very specific null hypothesis associated with it. You can only fully understand the resuts of a statistical test if you understand the null hypothesis it relies on. We will remind you about the null hypothesis and introduce the related concept of the alternative hypothesis at the end of this chapter.</p>
+<div id="hypotheses-and-null-hypotheses" class="section level3">
+<h3><span class="header-section-number">10.1.1</span> Hypotheses and null hypotheses</h3>
+<p>Previously we have said that an hypothesis is a statement of a proposed process or mechanism which might be responsible for an observed pattern or effect. We have also seen that in statistics, you will encounter ‘hypothesis’ used in a different, and quite specific way. In particular you will frequently see the term: <em>null hypothesis</em> (often written in statistics books as H<sub>0</sub>).</p>
+<p>The null hypothesis is simply statement of what we would expect to see if there is actually no effect of the factor we are looking at (e.g., plant morphology) on the variable that we measure (e.g., dry weight biomass). So in the above example our null hypothesis was <em>There is no difference in mean biomass of purple and green plants</em>. When comparing the sizes of rats eaten by eagle owls, the appropriate null hypothesis was <em>There is no difference between the mean size of rats eaten by eagle owls in summer and winter</em>.</p>
+<p>All statistical tests you are likely to encounter in biology work by specifying a null hypothesis and then evaluating the observed data to see if they deviate from the null hypothesisin a way that is inconsistent with sampling variation. This may seem like a rather odd approach, but there are good theoretical and practical reasons for doing things this way.</p>
+<p>You need to be aware of what a null hypothesis is, and what it is used for, or you won’t be able to interpret the results of statistical tests. However, in general discussion of tests we normally refer to the effect that is the opposite of the null hypothesis—i.e. it is the effect you are actually interested in—known as the <em>test hypothesis</em>, or the <em>alternative hypothesis</em> (often denoted H<sub>1</sub> in statistics books). The alternative hypothesis is essentially a statement of the effect you are interested in evaluating, e.g., purple and green plants differ in their mean size. It is a statement of whatever is implied if the null hypothesis is not true.</p>
+<p>Having got all the types of hypothesis sorted out, we can then use a particular frequentist technique (like a permutation test) to evaluate the observed result against that expected if the null hypothesis was true. The test gives us a probability (<em>p</em>-value) telling us how likely it is that we would have got the result we observe if the null hypothesis was, indeed, true.</p>
+<p>If the value is sufficiently small (conventionally if <em>p</em>&lt;0.05) we judge it unlikely that we would have seen this result if the null hypothesis was true and consequently we <em>reject the null hypothesis</em> (i.e. reject the notion that there is no difference) and instead <em>accept the alternative hypothesis</em> that there is a difference. Note that this is not the same as ‘proving’ the alternative hypothesis is true. You can’t prove anything by collecting data or carrying out an experiment.</p>
+<p>If the probability is large, then it is quite likely that we could have got the observed result if the null hypothesis was true, i.e. it is due to sampling variation. In this case we cannot reject the null hypothesis. Note that in this situation we say that we “<em>do not reject the null hypothesis</em>”. This is not the same as accepting that the null hypothesis is true, paradoxical though this may seem. One obvious reason for this is that if we only have a small sample then there may be an effect of the factor we are looking at, but we simply can’t detect it because we don’t have enough data.</p>
+</div>
+</div>
+<div id="a-few-words-about-p-values" class="section level2">
+<h2><span class="header-section-number">10.2</span> A few words about <em>p</em> values</h2>
+<p>It is important to understand the meaning of the probabilities generated by statistical tests. We have already said a <em>p</em>-value is the proportion of occasions on which you would expect to see a result at least as extreme as the one you actually observed if the null hypothesis (of no effect) was true. Conventionally (in biology at least) we accept a result as statistically significant if <em>p</em>&lt;0.05 (also expressed as 5%). There is nothing special about this cut-off point.</p>
+<p>A probability of 0.05 is a chance of 1 in 20. This means that if there really was no effect of the factor we are investigating, we would expect to get a result significant at <em>p</em>=0.05 about 5 times in 100 samples. To envisage it more easily, it is slightly less than the chance of tossing a coin 4 times and getting 4 heads in a row (<em>p</em>=0.0625). It’s not all that rare really.</p>
+<p>This puts a ‘significant’ result into context. Would you launch a new drug on the market or bring a prosecution for pollution on the evidence of the strength of four heads coming up in a row when a coin is tossed? Well of course such things are unlikely to hinge on a single test, but it is always worth bearing in mind what ‘significance’ actually means.</p>
+<p>Of course the smaller the probability the more confident one can be that the effect we see is real. A probability of <em>p</em>=0.01 (1 in 100) is pretty good evidence, and <em>p</em>=0.001 (1 in 1000), or less, is better still. For this reason, in some critical applications such as drug testing the value set for accepting a result as significant may be lower (e.g. <em>p</em>=0.01). The costs of using a more stringent threshold is that this increases the possibility of false negatives (called a ‘type II’ error)–i.e. we are more likely to fail to detect an effect whne it is really present.</p>
+<div id="what-if-is-close-to-0.05" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> What if is close to 0.05?</h3>
+<p>The thing to remember here is that although we tend to use <em>p</em>=0.05 as a cut-off, is really a continuous measure and <em>p</em>=0.055 is not very different from <em>p</em>=0.045. The exact value of will be affected by how well the data fulfil the assumptions of the test–-which will only be approximately with most biological data, so you shouldn’t set too much store by the difference between <em>p</em>=0.045 and <em>p</em>=0.055. It would be irrational on the one hand to reject an idea completely just on the basis of a result of <em>p</em>=0.055, while at the same time being prepared to invest large amounts of time and money implementing policies based on a result of <em>p</em>=0.045.</p>
+</div>
+<div id="biological-vs.statistical-significance" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> Biological vs. statistical significance</h3>
+<p>A final, but vital, point: do not confuse statistical significance with biological significance. A result may be statistically highly significant (say <em>p</em>&lt;0.001) but biologically trivial. To give a real example, in a study of the factors determining the distribution of freshwater invertebrates in a river, the pH of water was measured in the open water and in the middle of the beds of submerged vegetation. There was a statistically significant difference in pH (<em>p</em>&lt;0.01) but the mean pH values were 7.1 in the open water and 6.9 in the weeds. This is a very small effect, and almost certainly of no importance at all to the invertebrates.</p>
+<p>The significance of a result depends on a combination of three things (1) the size of the effect, (2) the variability of the data, (3) the number of samples. Even a tiny effect can be significant if the data have very little variation and the sample size is large. You should not automatically equate a significant result with a large effect—you need to inspect the estimates and consider the biological implications of the difference. The statistical results can give you some guidance in separating genuine differences from random variation, but they can’t tell you whether the difference is biologically interesting or important—that’s your job!</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="comparing-populations.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/2_03_concluding_stats_concepts.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"split_by": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

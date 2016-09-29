@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>APS 240: Data Analysis and Statistics with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield">
+  <meta name="generator" content="bookdown 0.1.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="APS 240: Data Analysis and Statistics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  <meta name="github-repo" content="dzchilds/stats-for-bio" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="APS 240: Data Analysis and Statistics with R" />
+  
+  <meta name="twitter:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  
+
+<meta name="author" content="Dylan Z. Childs">
+
+<meta name="date" content="2016-09-28">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="statistical-significance-and-p-values.html">
+<link rel="next" href="concluding-remarks.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<style type="text/css">
+
+.warning-box {
+  border: 3px solid #e60000;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.advanced-box {
+  border: 3px solid #268bd2;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.do-something {
+  border: 3px solid #803e00;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+</style>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">APS 240</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course information and overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#why-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Why do a data analysis course?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.2</b> Course overview</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#aims"><i class="fa fa-check"></i><b>1.2.1</b> Aims</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#objectives"><i class="fa fa-check"></i><b>1.2.2</b> Objectives</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#assumed-background"><i class="fa fa-check"></i><b>1.2.3</b> Assumed background</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#methods"><i class="fa fa-check"></i><b>1.2.4</b> Methods</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#non-assessed-material"><i class="fa fa-check"></i><b>1.2.5</b> Non-assessed material</a></li>
+<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#what-is-required-of-you"><i class="fa fa-check"></i><b>1.2.6</b> What is required of you?</a></li>
+<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i><b>1.2.7</b> Assessment</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#how-to-use-the-teaching-material"><i class="fa fa-check"></i><b>1.3</b> How to use the teaching material</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.1</b> The online course book</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.2</b> Printed material</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#how-to-make-best-use-of-it"><i class="fa fa-check"></i><b>1.3.3</b> How to make best use of the teaching material</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>1.3.4</b> Conventions used in the course material</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#feedback"><i class="fa fa-check"></i><b>1.3.5</b> Feedback</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#help"><i class="fa fa-check"></i><b>1.3.6</b> Help sessions</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#overall"><i class="fa fa-check"></i><b>1.3.7</b> Overall…</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#health-and-safety"><i class="fa fa-check"></i><b>1.4</b> Health and safety using display screen equipment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html"><i class="fa fa-check"></i><b>2</b> Expected learning outcomes</a><ul>
+<li class="chapter" data-level="2.1" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html#statistical-concepts-i"><i class="fa fa-check"></i><b>2.1</b> Statistical Concepts (I)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html"><i class="fa fa-check"></i><b>3</b> Programming prerequisites</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#starting-an-r-session-in-rstudio"><i class="fa fa-check"></i><b>3.1</b> Starting an R session in RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#using-packages"><i class="fa fa-check"></i><b>3.2</b> Using packages</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#reading-data-into-r"><i class="fa fa-check"></i><b>3.3</b> Reading data into R</a></li>
+<li class="chapter" data-level="3.4" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#data-frames"><i class="fa fa-check"></i><b>3.4</b> Data frames</a></li>
+<li class="chapter" data-level="3.5" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#package-functions"><i class="fa fa-check"></i><b>3.5</b> Package functions</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (I)</b></span></li>
+<li class="chapter" data-level="4" data-path="the-scientific-process.html"><a href="the-scientific-process.html"><i class="fa fa-check"></i><b>4</b> The scientific process</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#stages"><i class="fa fa-check"></i><b>4.1</b> Stages in the scientific process</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#observations"><i class="fa fa-check"></i><b>4.1.1</b> Observations</a></li>
+<li class="chapter" data-level="4.1.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#questions"><i class="fa fa-check"></i><b>4.1.2</b> Questions</a></li>
+<li class="chapter" data-level="4.1.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypotheses"><i class="fa fa-check"></i><b>4.1.3</b> Hypotheses</a></li>
+<li class="chapter" data-level="4.1.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#predictions"><i class="fa fa-check"></i><b>4.1.4</b> Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="4.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#are-we-sure"><i class="fa fa-check"></i><b>4.3</b> Don’t we ever know anything for sure?</a></li>
+<li class="chapter" data-level="4.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#further-reading"><i class="fa fa-check"></i><b>4.4</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-and-variables.html"><a href="data-and-variables.html"><i class="fa fa-check"></i><b>5</b> Data and variables</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-and-variables.html"><a href="data-and-variables.html#observations-on-material-and-obvious-things"><i class="fa fa-check"></i><b>5.1</b> “Observations on material and obvious things”</a></li>
+<li class="chapter" data-level="5.2" data-path="data-and-variables.html"><a href="data-and-variables.html#var-types"><i class="fa fa-check"></i><b>5.2</b> Revision: Types of variable</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-and-variables.html"><a href="data-and-variables.html#nominal-categorical-variables"><i class="fa fa-check"></i><b>5.2.1</b> Nominal (categorical) variables</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-and-variables.html"><a href="data-and-variables.html#ordinal-categorical-data"><i class="fa fa-check"></i><b>5.2.2</b> Ordinal (categorical) data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-and-variables.html"><a href="data-and-variables.html#interval-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.3</b> Interval scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-and-variables.html"><a href="data-and-variables.html#ratio-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.4</b> Ratio scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.5" data-path="data-and-variables.html"><a href="data-and-variables.html#which-is-best"><i class="fa fa-check"></i><b>5.2.5</b> Which is best?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-and-variables.html"><a href="data-and-variables.html#accuracy-precision"><i class="fa fa-check"></i><b>5.3</b> Accuracy and precision</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-and-variables.html"><a href="data-and-variables.html#what-do-they-mean"><i class="fa fa-check"></i><b>5.3.1</b> What do they mean?</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-and-variables.html"><a href="data-and-variables.html#implied-precision---significant-figures"><i class="fa fa-check"></i><b>5.3.2</b> Implied precision - significant figures</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-and-variables.html"><a href="data-and-variables.html#how-precise-should-measurements-be"><i class="fa fa-check"></i><b>5.3.3</b> How precise should measurements be?</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-and-variables.html"><a href="data-and-variables.html#error-bias-and-prejudice"><i class="fa fa-check"></i><b>5.3.4</b> Error, bias and prejudice</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="learning-from-data.html"><a href="learning-from-data.html"><i class="fa fa-check"></i><b>6</b> Learning from data</a><ul>
+<li class="chapter" data-level="6.1" data-path="learning-from-data.html"><a href="learning-from-data.html#populations"><i class="fa fa-check"></i><b>6.1</b> Populations</a></li>
+<li class="chapter" data-level="6.2" data-path="learning-from-data.html"><a href="learning-from-data.html#learning-about-populations"><i class="fa fa-check"></i><b>6.2</b> Learning about populations</a></li>
+<li class="chapter" data-level="6.3" data-path="learning-from-data.html"><a href="learning-from-data.html#morph-example"><i class="fa fa-check"></i><b>6.3</b> A simple example</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sampling-error.html"><a href="sampling-error.html"><i class="fa fa-check"></i><b>7</b> Sampling error</a><ul>
+<li class="chapter" data-level="7.1" data-path="sampling-error.html"><a href="sampling-error.html#sampling-error-1"><i class="fa fa-check"></i><b>7.1</b> Sampling error</a></li>
+<li class="chapter" data-level="7.2" data-path="sampling-error.html"><a href="sampling-error.html#sampling-distributions"><i class="fa fa-check"></i><b>7.2</b> Sampling distributions</a></li>
+<li class="chapter" data-level="7.3" data-path="sampling-error.html"><a href="sampling-error.html#the-effect-of-sample-size"><i class="fa fa-check"></i><b>7.3</b> The effect of sample size</a></li>
+<li class="chapter" data-level="7.4" data-path="sampling-error.html"><a href="sampling-error.html#the-standard-error"><i class="fa fa-check"></i><b>7.4</b> The standard error</a></li>
+<li class="chapter" data-level="7.5" data-path="sampling-error.html"><a href="sampling-error.html#what-is-the-point-of-all-this"><i class="fa fa-check"></i><b>7.5</b> What is the point of all this!?</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (II)</b></span></li>
+<li class="chapter" data-level="8" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html"><i class="fa fa-check"></i><b>8</b> Statistical significance and <em>p</em>-values</a><ul>
+<li class="chapter" data-level="8.1" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#bootstrap"><i class="fa fa-check"></i><b>8.1</b> Estimating a sampling distribution</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#bootstrap-overview"><i class="fa fa-check"></i><b>8.1.1</b> Overviw of bootstrapping</a></li>
+<li class="chapter" data-level="8.1.2" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#doing-it-for-real"><i class="fa fa-check"></i><b>8.1.2</b> Doing it for real</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#statistical-significance"><i class="fa fa-check"></i><b>8.2</b> Statistical significance</a></li>
+<li class="chapter" data-level="8.3" data-path="statistical-significance-and-p-values.html"><a href="statistical-significance-and-p-values.html#concluding-words"><i class="fa fa-check"></i><b>8.3</b> Concluding words</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="comparing-populations.html"><a href="comparing-populations.html"><i class="fa fa-check"></i><b>9</b> Comparing populations</a><ul>
+<li class="chapter" data-level="9.1" data-path="comparing-populations.html"><a href="comparing-populations.html#making-comparisons"><i class="fa fa-check"></i><b>9.1</b> Making comparisons</a></li>
+<li class="chapter" data-level="9.2" data-path="comparing-populations.html"><a href="comparing-populations.html#morph-weights-eg"><i class="fa fa-check"></i><b>9.2</b> A new example</a></li>
+<li class="chapter" data-level="9.3" data-path="comparing-populations.html"><a href="comparing-populations.html#evaluating-differences"><i class="fa fa-check"></i><b>9.3</b> Evaluating differences</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="comparing-populations.html"><a href="comparing-populations.html#statistical-significance-again"><i class="fa fa-check"></i><b>9.3.1</b> Statistical significance (again)</a></li>
+<li class="chapter" data-level="9.3.2" data-path="comparing-populations.html"><a href="comparing-populations.html#a-permutation-test"><i class="fa fa-check"></i><b>9.3.2</b> A permutation test</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="comparing-populations.html"><a href="comparing-populations.html#what-have-we-learned"><i class="fa fa-check"></i><b>9.4</b> What have we learned?</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="concluding-remarks.html"><a href="concluding-remarks.html"><i class="fa fa-check"></i><b>10</b> Concluding remarks</a><ul>
+<li class="chapter" data-level="10.1" data-path="concluding-remarks.html"><a href="concluding-remarks.html#a-few-words-about-the-null-hypothesis"><i class="fa fa-check"></i><b>10.1</b> A few words about the null hypothesis</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="concluding-remarks.html"><a href="concluding-remarks.html#hypotheses-and-null-hypotheses"><i class="fa fa-check"></i><b>10.1.1</b> Hypotheses and null hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="concluding-remarks.html"><a href="concluding-remarks.html#a-few-words-about-p-values"><i class="fa fa-check"></i><b>10.2</b> A few words about <em>p</em> values</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="concluding-remarks.html"><a href="concluding-remarks.html#what-if-is-close-to-0.05"><i class="fa fa-check"></i><b>10.2.1</b> What if is close to 0.05?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="concluding-remarks.html"><a href="concluding-remarks.html#biological-vs.statistical-significance"><i class="fa fa-check"></i><b>10.2.2</b> Biological vs. statistical significance</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Evaluating Associations</b></span></li>
+<li class="part"><span><b>Comparing Means</b></span></li>
+<li class="part"><span><b>Experimental Design</b></span></li>
+<li class="part"><span><b>Miscellaneous Topics</b></span></li>
+<li class="appendix"><span><b>Supplementary Material</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">APS 240: Data Analysis and Statistics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="comparing-populations" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Comparing populations</h1>
+<div id="making-comparisons" class="section level2">
+<h2><span class="header-section-number">9.1</span> Making comparisons</h2>
+<p>Scientific enquiry involves asking questions. One of the commonest kinds of question that we ask as biologists is: ‘Is there a difference between measurements from two samples?’ For example:</p>
+<p>‘Do male and female locusts differ in length?’</p>
+<p>‘Do maize plants photosynthesise at different rates at 25°C and 20°C?’</p>
+<p>‘Do eagle owls feed on rats of different sizes during winter and summer?’</p>
+<p>‘Do purple and green plant morphs differ in their biomass?’</p>
+<p>When we ask these kinds of questions what we’re really asking is whether or not the underlying populations are different. In order to answer these questions we need to step through the same kind of process discussed in the last few chapters.</p>
+</div>
+<div id="morph-weights-eg" class="section level2">
+<h2><span class="header-section-number">9.2</span> A new example</h2>
+<p>Last week, we looked at how to quantify uncertainty in a single estimate of the population mean biomass of a morph. This week, we want to compare the biomass samples of the two morphs to address the question: ‘Do purple and green plant morphs differ in their dry weight biomass?’. However, as it is currently framed, this question is a little too vague. The first thing we have to do is define what we mean by ‘different’.</p>
+<p>As always, we’ll investigate the problem by working through a simple example. We will stay with the purple morph / green morph example, but this time we’ll examine a different variable: the dry weight biomass of our imaginary plants. Perhaps we suspect that the two morphs have different growth habits. We think the purple plants are fitter, so we might predict that they are larger than the green plants (fitness is often correlated with size in plants).</p>
+<p>One way to address this prediction would be to measure the biomass of individuals of each morph, so that we can compare the biomass of each morph. In order to study the biomass of individuals in our hypothetical population, we would collect a sample of dry weights. Dry weight is a numeric variable, measured on a ratio scale. The population parameters of interest now are the population mean dry weights of each morph.</p>
+<p>Notice that our definition of ‘the population’ is slightly different than before. Now we are imagining that each morph is a seperate population. Let’s assume that we have sampled the dry weight (in grams) of 25 representative individuals of each morph.</p>
+<div class="do-something">
+<p>
+You should work through this example from now on…
+</p>
+</div>
+<p>As always, it is a very good idea to plot the data. We could do this in a variety of ways, but since we only have two groups (purple and green morphs), we may as well summarise the full sample distribution of each morph. The data are in the MORPH_WEIGHTS.CSV file, which we have read into R using the <code>read.csv</code> function. We stored the data in a data frame called <code>morph.weights</code>. Here is some <code>ggplot2</code> code to make the required plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(morph.weights, <span class="kw">aes</span>(<span class="dt">x =</span> weight)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binwidth =</span> <span class="dv">30</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(~pmorph, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="stats-for-bio_files/figure-html/two-morph-dist-1.png" width="672" /></p>
+<p>(Hopefully this plot will also remind you how to use the <code>facet_wrap</code> function to make a multipanel plot, based on the values of particular variable–<code>pmorph</code> in this case).</p>
+<p>What does this plot suggest? We are interested in the degree of similarity (or not!) of the two sample distributions. There is a lot of overlap in the dry weights of each morph, but in general we can say that: (1) green morph individuals tend to have higher dry weights than purple morphs, and (2) the green morphs seem to be more variable than purple morphs.</p>
+<p>The next step is to calculate some simple descriptive statistics for each morph. We need to know the sample means as these are our ‘best guesses’ of the population means. It may be useful to know something about the variability of the samples, which can be summarised by the sample standard deviation (this is not the standard error!). Here is a reminder of how to do this using <code>dplyr</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">morph.weights %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(pmorph) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(weight), <span class="dt">stan.dev =</span> <span class="kw">sd</span>(weight))</code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   pmorph   mean stan.dev
+##   &lt;fctr&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1  green 787.24 188.2309
+## 2 purple 657.92 114.0197</code></pre>
+<p>This shows that the mean dry weights of purple and green morphs are 658 grams and 787 grams, respectively. The standard deviation estimates from the two samples suggest that dry weights of green morphs are a little more variable than the purple morphs.</p>
+<p>We can get a better handle of these patterns by calculating the sample means and standard deviations of the two samples to evaluate their central tendency and spread, respectively. We know how to use <code>dplyr</code> functions <code>group_by</code> and <code>summarise</code> to do this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">descrip.stats &lt;-<span class="st"> </span>
+<span class="st">  </span>morph.weights %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(pmorph) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">wght.mean =</span> <span class="kw">mean</span>(weight), <span class="dt">wght.sd =</span> <span class="kw">sd</span>(weight))
+descrip.stats</code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   pmorph wght.mean  wght.sd
+##   &lt;fctr&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1  green    787.24 188.2309
+## 2 purple    657.92 114.0197</code></pre>
+<p>These descriptive statistics back up our visual impressions of the data: green morph individuals are larger than purple morphs (sample means: 787 vs. 658 grams), and green morphs are more variable than purple morphs (sample SDs: 118 vs. 114 grams). Remember, these numbers are just point estimates derived from limited samples. If we sampled the populations again, sampling variation would ensure that we end up with different estimates. This means we are not yet in a position to conclude that green morphs are bigger than purple morphs.</p>
+<p>Let’s return to our question: ‘Do purple and green morphs differ in their dry weight biomass?’. We said this question was a little too vague, and that we needed to define what we meant by ‘different’. One way in which the sample distributions seem to be different is with respect to their spread, and so one possible refinement of this question would be to ask whether this difference is ‘real’, or simply arises from sampling variation. There are circumstances where it is scientifically interesting to compare variability. However, it is much more common to focus on differences in the central tendency of samples.</p>
+<p>By looking at the central tendency of different samples, we can evaluate whether or not something we have measured increases or decreases, on average, among different populations. Many scientifically relevant questions are addressed by making this assessment. When someone uses a statistical test or model to ‘compare samples’, what they are usually doing is evaluating whether or not the central tendency of the populations are different. We typically make this assessment by evaluating the strength of evidence for the presence of <strong>a difference in the population means</strong> of the focal populations.</p>
+<p>The question we want to address is therefore: ‘What is the strength of evidence for a difference in the population mean biomass of purple and green plant morphs?’ In practise, this boils down to a another question: ‘Is there a statistically significant difference between their means.’</p>
+</div>
+<div id="evaluating-differences" class="section level2">
+<h2><span class="header-section-number">9.3</span> Evaluating differences</h2>
+<p>We will now turn to the idea of <strong>statistical significance</strong>. We will also see how to evaluate statistical significance by calculating a <strong><em>p</em>-value</strong> under a suitable <strong>null hypothesis</strong>.</p>
+<div id="statistical-significance-again" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Statistical significance (again)</h3>
+<p>In order to assess the strength of evidence for the presence of a difference between the population means of two groups, we have to do something that, at first glance, looks very strange. We can break this down into four steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>We assume that there is actually no difference between the population means. That is, we hypothesise that all the data are sampled from a pair of populations that are characterised by a single, shared population mean.</p></li>
+<li><p>Next, we use information in the sample to help us work out what would happen if we were to repeatedly take samples in this hypothetical situation of ‘no difference between samples’. This usually involves calculating a sampling distribution of some kind of test statistic.</p></li>
+<li><p>We then ask, ‘if there is no difference between the two groups, what is the probability that we would observe a difference that is the same as, or more extreme than, the one we actually observed in the true sample?’</p></li>
+<li><p>If the observed difference is sufficiently improbable, then we conclude that we have found a ‘statistically significant’ result. A statistically significant result is therefore one that is inconsistent with the hypothesis of no difference.</p></li>
+</ol>
+<p>(We will discuss how to define ‘sufficiently improbable’ once we’ve worked through an example.)</p>
+<p>There are many different ways to go about realising this process. We’ll look at one of these today. Regardless of the details, they all work by trying to evaluate what happens when we repeatedly sample from a population where the effect of interest (e.g. a difference between means) <em>is absent</em>. That sounds odd, but if you can understand this fundamental idea you are well on your way to understanding how frequentist statistics works.</p>
+<p>Let’s return to our example to see how this might work in practise.</p>
+</div>
+<div id="a-permutation-test" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> A permutation test</h3>
+<p>In our example, a hypothesis of ‘no difference’ between the mean dry weights of purple and green morphs has the following implication. It means both morphs are really sampled from the same population, and as such, the labels ‘purple’ and ‘green’ are meaningless. These labels may as well have been randomly assigned to each individual. This suggests that we can evaluate the statistical significance of the observed difference as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Make a copy of the original sample of purple and green dry weights, but do so by randomly assigning the labels ‘purple’ and ‘green’ to this new copy of the data. Do this in such a way that the original sample sizes are preserved.</li>
+</ol>
+<p>(We have to preserve the original sample sizes because we want to mimic the sampling process that we actually used. The process of assigning random lablels is called permutation)</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Repeat this permutation scheme until we have a large number of artificial samples; 1000-10000 randomly permuted samples may be sufficient.</p></li>
+<li><p>For each permuted sample, calculate whatever sample statistic is of interest. In this case, we want the <em>difference</em> between the mean dry weight of purple and green morphs in each sample.</p></li>
+<li><p>Compare the observed sample statistic (i.e. the difference between the mean dry weights) to the distribution of sample statistic from the randomly permutated samples.</p></li>
+</ol>
+<p>This scheme is called a permutation test, because it involves random permutation of the group labels. Why is it useful? <em>Each unique random permutation yields an observation from the sampling distribution of the difference among sample means, under the assumption that this difference is really zero in the population.</em> This means we can assess whether an observed difference is consistent with the hypothesis of no difference by looking at where it lies relative to this sampling distribution.</p>
+<p>We have implemented a permutation test in R using the purple/green morph dataset for you, using 2000 permutations. We won’t show you the R code because it uses a few tricks you haven’t been taught, but we can look at a couple of permuted samples to get a sense of how this works:</p>
+<pre><code>## $`Sample 1`
+## purple purple purple  green  green purple purple purple purple purple 
+##    500    545    641    565    624    616    605    585    896    699 
+## purple  green  green  green  green purple  green purple purple  green 
+##    700    433    658    673    860    658    717    832    648    701 
+##  green  green purple  green  green purple  green purple purple purple 
+##    721    556    852    542    621    542   1036    842    756    847 
+##  green  green  green purple purple purple  green  green  green purple 
+##    828    854   1188    615    901    583    874    866    689    442 
+## purple  green  green  green  green  green  green purple purple purple 
+##    795    930    685    860    703    765    480    734   1201    665 
+## 
+## $`Sample 2`
+## purple  green  green  green  green purple purple purple  green purple 
+##    500    545    641    565    624    616    605    585    896    699 
+##  green purple  green purple  green  green purple purple  green  green 
+##    700    433    658    673    860    658    717    832    648    701 
+##  green purple purple  green purple purple  green  green purple  green 
+##    721    556    852    542    621    542   1036    842    756    847 
+## purple  green purple purple  green  green purple  green purple  green 
+##    828    854   1188    615    901    583    874    866    689    442 
+##  green  green purple purple  green  green purple purple purple purple 
+##    795    930    685    860    703    765    480    734   1201    665</code></pre>
+<p>The data from each permutation are stored as numeric vectors, in which each element of the vector is named (these are the labels). Notice that the set of numbers does not change among the permuted samples. The only difference between them is the labelling of the numbers. The difference between the mean dry weights in the first permutation is -29.16. This difference is -20.68 in the second sample.</p>
+<p>What we really care about here is distribution of these differences. This is an approximation to the the sampling distribution of the difference between means. Here is a histogram that summarises the 2000 mean differences from the permuted samples: <img src="stats-for-bio_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>Notice that this distribution is centred at zero. This makes sense–if we take a set of numbers and randomly allocate them to groups, on average, we expect the difference between the mean of these groups to be zero. The red line shows the location of the observed difference between purple and green morph mean dry weights. The relevant feature here is the location of this observed difference within the sampling distribution.</p>
+<p>What does this figure tell us? It looks like the observed difference is very unlikely to have arisen through sampling variation, under the assumption that the population means of the two groups are identical. We can say this because the observed difference lies at the end of one ‘tail’ of the sampling distribution. We need to be able to make a more precise statement than this though.</p>
+<p>Only 7 out of the 2000 permutations ended up being equal to, or ‘more extreme’ (i.e., more negative), than the observed difference. The probability of finding a difference in the means equal to or more negative than the observed difference (denoted <em>p</em>) is therefore, <em>p</em>=0.0035 (0.35%). This probability has a special name. It is called the <strong><em>p</em>-value</strong>. A <em>p</em>-value is defined as the probability of obtaining a result equal to or ‘more extreme’ than what was actually observed, assuming that the hypothesis under consideration is true.</p>
+<p>We have to be careful at this point. The test we just did is called a ‘one-tailed’ test, because we only looked at one end (the tail) of the sampling distribution. However, we did not set out to test whether purple plants were smaller on average than green plants. We set out to assess whether they are different, but we never made a statement about the direction of the effect. This means we also have to consider the possibility of an effect in the opposite direction to what was observed.</p>
+<p>To do this, we have to count up the cases that fall into the upper and lower tails of the distribution, where each tail is defined by the region that lies beyond the absolute value of the observed difference, on the positive and negative halves of the x axis: <img src="stats-for-bio_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>When we do this, we find that 11 out of the 2000 permutations lie beyond the observed difference, and so the new <em>p</em>-value is <em>p</em>=0.0055 (0.55%). This kind of test–where we look at both tails of the sampling distribution–is called a ‘two-tailed’ test. We discuss the reasoning for and against using a one- or two-tailed test in this week’s self-directed practical.</p>
+</div>
+</div>
+<div id="what-have-we-learned" class="section level2">
+<h2><span class="header-section-number">9.4</span> What have we learned?</h2>
+<p>Permutation tests are reasonably straightforward to apply in simple situations, but can be tricky to apply in a more complex setting. We are not expecting you be able to implement a permutation test yourself. We used it to demonstrate how frequentist statistics works for making comparisons.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="statistical-significance-and-p-values.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="concluding-remarks.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/2_02_comparisons_p-values.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"split_by": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

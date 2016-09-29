@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>APS 240: Data Analysis and Statistics with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield">
+  <meta name="generator" content="bookdown 0.1.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="APS 240: Data Analysis and Statistics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  <meta name="github-repo" content="dzchilds/stats-for-bio" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="APS 240: Data Analysis and Statistics with R" />
+  
+  <meta name="twitter:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  
+
+<meta name="author" content="Dylan Z. Childs">
+
+<meta name="date" content="2016-09-29">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="learning-from-data.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<style type="text/css">
+
+.warning-box {
+  border: 3px solid #e60000;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.advanced-box {
+  border: 3px solid #268bd2;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.do-something {
+  border: 3px solid #803e00;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+</style>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">APS 240</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course information and overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#why-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Why do a data analysis course?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.2</b> Course overview</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#aims"><i class="fa fa-check"></i><b>1.2.1</b> Aims</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#objectives"><i class="fa fa-check"></i><b>1.2.2</b> Objectives</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#assumed-background"><i class="fa fa-check"></i><b>1.2.3</b> Assumed background</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#methods"><i class="fa fa-check"></i><b>1.2.4</b> Methods</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#non-assessed-material"><i class="fa fa-check"></i><b>1.2.5</b> Non-assessed material</a></li>
+<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#what-is-required-of-you"><i class="fa fa-check"></i><b>1.2.6</b> What is required of you?</a></li>
+<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i><b>1.2.7</b> Assessment</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#how-to-use-the-teaching-material"><i class="fa fa-check"></i><b>1.3</b> How to use the teaching material</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.1</b> The online course book</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.2</b> Printed material</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#how-to-make-best-use-of-it"><i class="fa fa-check"></i><b>1.3.3</b> How to make best use of the teaching material</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>1.3.4</b> Conventions used in the course material</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#feedback"><i class="fa fa-check"></i><b>1.3.5</b> Feedback</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#help"><i class="fa fa-check"></i><b>1.3.6</b> Help sessions</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#overall"><i class="fa fa-check"></i><b>1.3.7</b> Overall…</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#health-and-safety"><i class="fa fa-check"></i><b>1.4</b> Health and safety using display screen equipment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html"><i class="fa fa-check"></i><b>2</b> Expected learning outcomes</a><ul>
+<li class="chapter" data-level="2.1" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html#statistical-concepts-i"><i class="fa fa-check"></i><b>2.1</b> Statistical Concepts (I)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html"><i class="fa fa-check"></i><b>3</b> Programming prerequisites</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#starting-an-r-session-in-rstudio"><i class="fa fa-check"></i><b>3.1</b> Starting an R session in RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#using-packages"><i class="fa fa-check"></i><b>3.2</b> Using packages</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#reading-data-into-r"><i class="fa fa-check"></i><b>3.3</b> Reading data into R</a></li>
+<li class="chapter" data-level="3.4" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#data-frames"><i class="fa fa-check"></i><b>3.4</b> Data frames</a></li>
+<li class="chapter" data-level="3.5" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#package-functions"><i class="fa fa-check"></i><b>3.5</b> Package functions</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (I)</b></span></li>
+<li class="chapter" data-level="4" data-path="the-scientific-process.html"><a href="the-scientific-process.html"><i class="fa fa-check"></i><b>4</b> The scientific process</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#stages"><i class="fa fa-check"></i><b>4.1</b> Stages in the scientific process</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#observations"><i class="fa fa-check"></i><b>4.1.1</b> Observations</a></li>
+<li class="chapter" data-level="4.1.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#questions"><i class="fa fa-check"></i><b>4.1.2</b> Questions</a></li>
+<li class="chapter" data-level="4.1.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypotheses"><i class="fa fa-check"></i><b>4.1.3</b> Hypotheses</a></li>
+<li class="chapter" data-level="4.1.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#predictions"><i class="fa fa-check"></i><b>4.1.4</b> Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="4.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#are-we-sure"><i class="fa fa-check"></i><b>4.3</b> Don’t we ever know anything for sure?</a></li>
+<li class="chapter" data-level="4.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#further-reading"><i class="fa fa-check"></i><b>4.4</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-and-variables.html"><a href="data-and-variables.html"><i class="fa fa-check"></i><b>5</b> Data and variables</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-and-variables.html"><a href="data-and-variables.html#observations-on-material-and-obvious-things"><i class="fa fa-check"></i><b>5.1</b> “Observations on material and obvious things”</a></li>
+<li class="chapter" data-level="5.2" data-path="data-and-variables.html"><a href="data-and-variables.html#var-types"><i class="fa fa-check"></i><b>5.2</b> Revision: Types of variable</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-and-variables.html"><a href="data-and-variables.html#nominal-categorical-variables"><i class="fa fa-check"></i><b>5.2.1</b> Nominal (categorical) variables</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-and-variables.html"><a href="data-and-variables.html#ordinal-categorical-data"><i class="fa fa-check"></i><b>5.2.2</b> Ordinal (categorical) data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-and-variables.html"><a href="data-and-variables.html#interval-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.3</b> Interval scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-and-variables.html"><a href="data-and-variables.html#ratio-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.4</b> Ratio scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.5" data-path="data-and-variables.html"><a href="data-and-variables.html#which-is-best"><i class="fa fa-check"></i><b>5.2.5</b> Which is best?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-and-variables.html"><a href="data-and-variables.html#accuracy-precision"><i class="fa fa-check"></i><b>5.3</b> Accuracy and precision</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-and-variables.html"><a href="data-and-variables.html#what-do-they-mean"><i class="fa fa-check"></i><b>5.3.1</b> What do they mean?</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-and-variables.html"><a href="data-and-variables.html#implied-precision---significant-figures"><i class="fa fa-check"></i><b>5.3.2</b> Implied precision - significant figures</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-and-variables.html"><a href="data-and-variables.html#how-precise-should-measurements-be"><i class="fa fa-check"></i><b>5.3.3</b> How precise should measurements be?</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-and-variables.html"><a href="data-and-variables.html#error-bias-and-prejudice"><i class="fa fa-check"></i><b>5.3.4</b> Error, bias and prejudice</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="learning-from-data.html"><a href="learning-from-data.html"><i class="fa fa-check"></i><b>6</b> Learning from data</a><ul>
+<li class="chapter" data-level="6.1" data-path="learning-from-data.html"><a href="learning-from-data.html#populations"><i class="fa fa-check"></i><b>6.1</b> Populations</a></li>
+<li class="chapter" data-level="6.2" data-path="learning-from-data.html"><a href="learning-from-data.html#learning-about-populations"><i class="fa fa-check"></i><b>6.2</b> Learning about populations</a></li>
+<li class="chapter" data-level="6.3" data-path="learning-from-data.html"><a href="learning-from-data.html#morph-example"><i class="fa fa-check"></i><b>6.3</b> A simple example</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sampling-error.html"><a href="sampling-error.html"><i class="fa fa-check"></i><b>7</b> Sampling error</a><ul>
+<li class="chapter" data-level="7.1" data-path="sampling-error.html"><a href="sampling-error.html#sampling-error-1"><i class="fa fa-check"></i><b>7.1</b> Sampling error</a></li>
+<li class="chapter" data-level="7.2" data-path="sampling-error.html"><a href="sampling-error.html#sampling-distributions"><i class="fa fa-check"></i><b>7.2</b> Sampling distributions</a></li>
+<li class="chapter" data-level="7.3" data-path="sampling-error.html"><a href="sampling-error.html#the-effect-of-sample-size"><i class="fa fa-check"></i><b>7.3</b> The effect of sample size</a></li>
+<li class="chapter" data-level="7.4" data-path="sampling-error.html"><a href="sampling-error.html#the-standard-error"><i class="fa fa-check"></i><b>7.4</b> The standard error</a></li>
+<li class="chapter" data-level="7.5" data-path="sampling-error.html"><a href="sampling-error.html#what-is-the-point-of-all-this"><i class="fa fa-check"></i><b>7.5</b> What is the point of all this!?</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (II)</b></span></li>
+<li class="part"><span><b>Simple Parametric Statistics</b></span></li>
+<li class="part"><span><b>Evaluating Associations</b></span></li>
+<li class="part"><span><b>Comparing Means</b></span></li>
+<li class="part"><span><b>Experimental Design</b></span></li>
+<li class="part"><span><b>Miscellaneous Topics</b></span></li>
+<li class="appendix"><span><b>Supplementary Material</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">APS 240: Data Analysis and Statistics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sampling-error" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Sampling error</h1>
+<p>In the previous chapter we introduced the idea that a point estimate of a population parameter will be imperfect, in the sense that it won’t exactly reflect the true value of that parameter. This uncertainty is always present, so it’s not enough to have just estimated something. We have to know about the uncertainty (i.e. the precision) of the estimate. We use the machinery of statistics to quantify this uncertainty.</p>
+<p>Once we have pinned down the uncertainty we can start to provide meaningful answers to our scientific questions. We will arrive at this ‘getting to the answer step’ in the next chapter. First we have to develop the uncertainty idea a bit more. We need to learn about sampling error, sampling distributions and standard errors.</p>
+<div id="sampling-error-1" class="section level2">
+<h2><span class="header-section-number">7.1</span> Sampling error</h2>
+<p>Let’s carry on with the plant polymorphism example from the previous chapter: the green-purple plant polymorphism. Skim back over the example if you can’t remember it, as you need to know what we’re trying to do for this chapter to be useful. So far, we had taken one sample of 20 plants from our hypothetical population and found the the frequency of purple plants in that sample was 35%. This is a point estimate of purple plant frequency based on a random sample of 20 plants.</p>
+<p>What happens if we repeat the same process, leading to a new, completely independent sample? Here’s a reminder of what the population looked like, along with a new sample highlighted with red circles:</p>
+<div class="figure" style="text-align: center"><span id="fig:plants-samp2"></span>
+<img src="stats-for-bio_files/figure-html/plants-samp2-1.png" alt="Plants sampled on the second occasion" width="50%" />
+<p class="caption">
+Figure 7.1: Plants sampled on the second occasion
+</p>
+</div>
+<p>This time we ended up sampling 16 green plants and 4 purple plants, so our second estimate of the purple morph frequency is 20%. This is quite different from the first estimate. Notice that it is actually lower than that seen in the original study population. Our hypothesis that the purple morph will be more prevalent in the new study population is beginning to look a little shaky…</p>
+<p>Note that nothing about the study population changed between the first and second sample. What’s more, we used a completely reliable sampling scheme to generate these samples (you’ll have to trust us on that one). There was nothing biased or ‘incorrect’ about the way individuals were sampled—every individual had the same chance of being selected. The two different estimates of the purple morph frequency simply arise from chance variation in selection. This variation, which arises whenever we observe a sample instead of the whole population, has a special name. It is called the <strong>sampling error</strong>.</p>
+<p>(Another name for sampling error is ‘sampling variation’. Which one is better? Neither really. We tend to use both terms—‘sampling error’ and ‘sampling variation’—in this book because they are both widely used)</p>
+<p>Sampling error is the main reason why we have to use statistics. Any estimate you derive from a sample is affected by it. Sampling error is not really a property of any particular sample though. The form of sampling error in any given problem is a consequence of the population distribution of the variable(s) we’re studying, and the sampling method used to investigate this. That may seem a little cryptic now. Don’t worry, we will start to get a sense of what it really means in this chapter.</p>
+</div>
+<div id="sampling-distributions" class="section level2">
+<h2><span class="header-section-number">7.2</span> Sampling distributions</h2>
+<p>We can develop our simple simulation example a bit more to explore the consequences of sampling error. However, rather than taking one sample at a time, we’ll use R to simulate thousands of independent samples. The number of plants sampled (‘n’) will always be 20. Here’s the important bit: every sample is drawn from the same population, i.e. the population parameter (purple morph frequency) will never change across samples. This means any variation we observe will be due to nothing more sampling error.</p>
+<p>Here is a summary of one such repeated simulation exercise:</p>
+<div class="figure" style="text-align: center"><span id="fig:samp-dist-1"></span>
+<img src="stats-for-bio_files/figure-html/samp-dist-1-1.png" alt="Distribution of number of purple morphs sampled (n = 20)" width="100%" />
+<p class="caption">
+Figure 7.2: Distribution of number of purple morphs sampled (n = 20)
+</p>
+</div>
+<p>This bar plot summarises the result from 100000 samples. In each sample, we took 20 individuals from our hypothetical population and calculated the number of purple morphs found. The bar plot shows the number of times we found 0, 1, 2, 3, … purple individuals, all the way up to the maximum possible (20). We could have converted these numbers to frequencies, but instead we’re just summarising the raw distribution of purple morph counts that we found. This distribution has a special name. It is called a <strong>sampling distribution</strong>.</p>
+<p>The sampling distribution is just the distribution we expect a particular estimate (or more generally, a ‘statistic’) to follow. In order to to work this out, we have to postulate values for the population parameters, and we have to know how the population was sampled. Rather than use mathematical reasoning, we used brute-force simulation to approximate the sampling distribution of purple morph counts that arises when we sample 20 individuals from our hypothetical population.</p>
+<p>What does the sampling distribution show? It shows us the range of outcomes we can expect when we repeat the same sampling process over and over again. The most common outcome is 8 purple morphs, which would yield an estimate of 8/20 = 40% for the purple morph frequency. This is the frequency that was actually used to simulate the data (we didn’t tell you that before). The population parameter we’re trying to learn about turns out to be the most common point estimate we should expect to see under repeated sampling.</p>
+<p>(So now we know the answer to question. The purple morph frequency is 40%. Of course we cheated though, because we used information from 1000s of samples. In the real world we only have one, limited sample.)</p>
+<p>The sampling distribution is the key to ‘doing statistics’. Look at the spread (dispersion) of the sampling distribution above. The range of outcomes is roughly 2 to 15, which corresponds to estimated frequencies of the purple morph in the range of 10-75%, because we sampled 20 individuals on each occasion. This tells us that when we sample only 20 individuals, the sampling error is expected to be quite large.</p>
+<p>Note that the sampling distribution we summarised above is only relevant for the case where 20 individuals are sampled, and the frequency of purple plants in the population is 40%. If we change either of those two things we would end up with a different sampling distribution. That’s what we meant when we said, “The form of sampling error in any given problem is a consequence of the population distribution of the variable(s) we’re studying, and the sampling method used to investigate this.”</p>
+<p>Once we know how to calculate the sampling distribution for a particular problem, we can start to make statements about sampling error (to quantify uncertainty), and we can begin to make meaningful comparisons to address scientific questions. We don’t have to work any of this out for ourselves — statisticians have done the hard work for us.</p>
+</div>
+<div id="the-effect-of-sample-size" class="section level2">
+<h2><span class="header-section-number">7.3</span> The effect of sample size</h2>
+<p>One of the most important aspect of a sampling scheme is the <strong>sample size</strong> (denoted ‘n’). This is just the number of observations (individuals, objects, items, etc) in a sample. What happens when we change the sample size?</p>
+<p>We’ll carry on with the example to see how sample size influences the sampling distribution, and to understand why it matters. Let’s repeat the multiple sampling exercise, but this time do it with two different sample sizes. First we’ll use a sample size of 40 individuals, and then we’ll take a sample of 80 individuals each time. As before, we’ll take a total 100000 samples each time:</p>
+<div class="figure" style="text-align: center"><span id="fig:samp-dist-2"></span>
+<img src="stats-for-bio_files/figure-html/samp-dist-2-1.png" alt="Distribution of number of purple morphs sampled (n = 40)" width="100%" />
+<p class="caption">
+Figure 7.3: Distribution of number of purple morphs sampled (n = 40)
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:samp-dist-3"></span>
+<img src="stats-for-bio_files/figure-html/samp-dist-3-1.png" alt="Distribution of number of purple morphs sampled (n = 80)" width="100%" />
+<p class="caption">
+Figure 7.4: Distribution of number of purple morphs sampled (n = 80)
+</p>
+</div>
+<p>What do these plots tell us about the effect of changing sample size? Notice that we plotted each of them over the full range of possible outcomes (the x axis runs from 0-40 and 0-80, respectively, in the first and second plot). This is so we can meaningfully compare the spread of each sampling distribution relative to the range of possible outcomes.</p>
+<p>The range of outcomes in the first plot (n = 40) is roughly 6 to 26, which corresponds to estimated frequencies of the purple morph in the range of 15-65%. The range of outcomes in the second plot (n = 80) is roughly 16 to 48, which corresponds to estimated frequencies in the range of 20-60%. The implications of this not so rigorous assessment are probably obvious. When we increase the sample size we can expect to encounter less sampling error. This makes intuitive sense: the composition of large sample should more closely approximate that of the true population than a small sample.</p>
+How much data do we need to collect to accurately estimate a frequency? Here is the approximate sampling distribution of the purple morph frequency estimate when we sample 500 individuals:
+<div class="figure" style="text-align: center"><span id="fig:samp-dist-big"></span>
+<img src="stats-for-bio_files/figure-html/samp-dist-big-1.png" alt="Distribution of number of purple morphs sampled (n = 500)" width="100%" />
+<p class="caption">
+Figure 7.5: Distribution of number of purple morphs sampled (n = 500)
+</p>
+</div>
+<p>Now the range of outcomes is about 160 to 240, corresponding to purple morph frequencies in the 32-48% range. This is a big improvement over the smaller samples that we just considered, but even with 500 individuals in a sample, we should still expect quite a lot of uncertainty in our estimate. The take home message is that you need a lot of data to reduce sampling error.</p>
+</div>
+<div id="the-standard-error" class="section level2">
+<h2><span class="header-section-number">7.4</span> The standard error</h2>
+<p>We’ve been fairly relaxed about how we quantified the spread of a sampling distribution up until this point. We just estimated the approximate range of purple morph counts “by eye”. This is fine for investigating general patterns, but to make rigorous comparisons, we really need a quantitative measure of this variability. This is called the <strong>standard error</strong>.</p>
+<p>The standard error is actually quite a simple idea, though its definition often causes confusion. Here is that definition: a standard error is the standard deviation of the sampling distribution of an estimate, like a mean or a frequency. Don’t worry if that makes absolutely no sense. The key point is that it is a standard deviation, so it a measure of the spread, or dispersion, of a distribution. The distribution in the case of a standard error is the sampling distribution of some kind of estimate.</p>
+<p>(It is common to use a shorthand abbreviations such “SE”, “S.E.”, “se” or “s.e.” in place of ‘standard error’ when referring to the standard error in text.)</p>
+<p>We can use a simulation in R to calculate the expected standard error of an estimate of purple morph frequency. In order to do this we have to specify the value of the population frequency, and we have to decide what sample size we want to evaluate.</p>
+<p>Let’s find the expected standard error when the purple morph frequency is 40% and the sample size is 80. First we set up the simulation by assigning values to different variables to control what the simulation does:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purple_prob &lt;-<span class="st"> </span><span class="fl">0.4</span>
+sample_size &lt;-<span class="st"> </span><span class="dv">80</span>
+n_samples &lt;-<span class="st"> </span><span class="dv">100000</span></code></pre></div>
+<p>The value of <code>purple_prob</code> is the probability a plant will be purple (0.4 — R doesn’t like percentages), the value of <code>sample_size</code> is the sample size for each sample, and the value of <code>n_samples</code> is the number of independent samples we’ll take. That’s simple enough.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw_samples &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n_samples, <span class="dt">size =</span> sample_size, <span class="dt">prob =</span> purple_prob)
+percent_samples &lt;-<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span>raw_samples /<span class="st"> </span>sample_size</code></pre></div>
+<p>You don’t have to understand how this works, but if you did A-level statistics you might be able to guess what the <code>rbinom</code> function is doing. Honestly though, the R code isn’t important here. We’re just showing it to you to demonstrate that seemingly complex simulations are often easy to do in R. It is more or less the same code we used to generate those plots above (the only difference is that this time we converted the numbers into proportions).</p>
+<p>The result is what matters. We simulated the percentage of purple morph individuals found in 100000 samples of 20 individuals, assuming the purple morph frequency is always 40%. The results are stored the result in a vector called <code>percent_samples</code>. Here are the first 50 values of that vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(percent_samples, <span class="dv">50</span>)</code></pre></div>
+<pre><code>##  [1] 42.50 37.50 36.25 30.00 35.00 35.00 51.25 35.00 41.25 36.25 32.50
+## [12] 37.50 32.50 38.75 37.50 36.25 33.75 35.00 42.50 41.25 46.25 35.00
+## [23] 42.50 45.00 43.75 40.00 41.25 52.50 43.75 38.75 38.75 47.50 42.50
+## [34] 40.00 43.75 42.50 36.25 42.50 43.75 43.75 35.00 42.50 35.00 37.50
+## [45] 41.25 40.00 45.00 40.00 41.25 38.75</code></pre>
+<p>These numbers are all part of the sampling distribution of morph frequency estimates. So… how to calculate the standard error? This is the standard deviation of these numbers, so we just use the <code>sd</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(percent_samples)</code></pre></div>
+<pre><code>## [1] 5.494687</code></pre>
+<p>What is this useful? The standard error gives us a standard means to compare the variability we expect to see, or the variability we actually see, in different sampling distributions. As long as the sampling distribution is ‘well-behaved’, then, roughly speaking, most estimates (~95%) can be expected to lie in a range of about four standard errors. If you’re not convinced, look at the second bar plot we produced above (where the sample size = 80, and the purple morph frequency = 40%). What is the approximate range of simulated values? How close is this to <span class="math inline">\(4 \times 5.5\)</span>? Pretty close we think…</p>
+<p>So in summary, the standard error gives us a way to quantify how much variability we expect to see in a sampling distributions. We said in the previous chapter (<a href="learning-from-data.html#learning-from-data">Learning from data</a>) that a point estimate is useless without some kind of associated measure of uncertainty. A standard error is one such measure.</p>
+</div>
+<div id="what-is-the-point-of-all-this" class="section level2">
+<h2><span class="header-section-number">7.5</span> What is the point of all this!?</h2>
+<p>By this point you might (quite reasonably) be wondering why we have spent so much time looking at properties of repeated samples from a population. After all, when we collect data in the real world we’ll only have a single sample to work with. We can’t just keep collecting more and more data. We also won’t know anything about the population parameter of interest. This lack of knowledge is the reason for collecting the data in the first place!</p>
+<p>The short answer to this question is that before we can start to use frequentist statistics—remember, that’s our ultimate goal—we need to have a sense of…</p>
+<ul>
+<li><p>how point estimates behave under repeated sampling (i.e. sampling distributions),</p></li>
+<li><p>and how ‘sampling error’ and ‘standard error’ relate to sampling distributions.</p></li>
+</ul>
+<p>Once we understand these links, we’re able to start exploring the techniques that underlie frequentist statistics. That’s what we’ll do in the next block of work…</p>
+
+</div>
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="learning-from-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/1_04_standard_error.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"split_by": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

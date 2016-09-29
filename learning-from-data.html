@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>APS 240: Data Analysis and Statistics with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield">
+  <meta name="generator" content="bookdown 0.1.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="APS 240: Data Analysis and Statistics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  <meta name="github-repo" content="dzchilds/stats-for-bio" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="APS 240: Data Analysis and Statistics with R" />
+  
+  <meta name="twitter:description" content="Course book for Data Analysis and Statistics with R (APS 240) in the Department of Animal and Plant Sciences, University of Sheffield" />
+  
+
+<meta name="author" content="Dylan Z. Childs">
+
+<meta name="date" content="2016-09-29">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-and-variables.html">
+<link rel="next" href="sampling-error.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<style type="text/css">
+
+.warning-box {
+  border: 3px solid #e60000;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.advanced-box {
+  border: 3px solid #268bd2;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.do-something {
+  border: 3px solid #803e00;
+  margin:  0px 0px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 6px 6px 6px 6px;
+}
+
+</style>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">APS 240</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course information and overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#why-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Why do a data analysis course?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.2</b> Course overview</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#aims"><i class="fa fa-check"></i><b>1.2.1</b> Aims</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#objectives"><i class="fa fa-check"></i><b>1.2.2</b> Objectives</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#assumed-background"><i class="fa fa-check"></i><b>1.2.3</b> Assumed background</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#methods"><i class="fa fa-check"></i><b>1.2.4</b> Methods</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#non-assessed-material"><i class="fa fa-check"></i><b>1.2.5</b> Non-assessed material</a></li>
+<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#what-is-required-of-you"><i class="fa fa-check"></i><b>1.2.6</b> What is required of you?</a></li>
+<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i><b>1.2.7</b> Assessment</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#how-to-use-the-teaching-material"><i class="fa fa-check"></i><b>1.3</b> How to use the teaching material</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.1</b> The online course book</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#printed-material"><i class="fa fa-check"></i><b>1.3.2</b> Printed material</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#how-to-make-best-use-of-it"><i class="fa fa-check"></i><b>1.3.3</b> How to make best use of the teaching material</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i><b>1.3.4</b> Conventions used in the course material</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#feedback"><i class="fa fa-check"></i><b>1.3.5</b> Feedback</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#help"><i class="fa fa-check"></i><b>1.3.6</b> Help sessions</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#overall"><i class="fa fa-check"></i><b>1.3.7</b> Overall…</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#health-and-safety"><i class="fa fa-check"></i><b>1.4</b> Health and safety using display screen equipment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html"><i class="fa fa-check"></i><b>2</b> Expected learning outcomes</a><ul>
+<li class="chapter" data-level="2.1" data-path="expected-learning-outcomes.html"><a href="expected-learning-outcomes.html#statistical-concepts-i"><i class="fa fa-check"></i><b>2.1</b> Statistical Concepts (I)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html"><i class="fa fa-check"></i><b>3</b> Programming prerequisites</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#starting-an-r-session-in-rstudio"><i class="fa fa-check"></i><b>3.1</b> Starting an R session in RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#using-packages"><i class="fa fa-check"></i><b>3.2</b> Using packages</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#reading-data-into-r"><i class="fa fa-check"></i><b>3.3</b> Reading data into R</a></li>
+<li class="chapter" data-level="3.4" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#data-frames"><i class="fa fa-check"></i><b>3.4</b> Data frames</a></li>
+<li class="chapter" data-level="3.5" data-path="programming-prerequisites.html"><a href="programming-prerequisites.html#package-functions"><i class="fa fa-check"></i><b>3.5</b> Package functions</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (I)</b></span></li>
+<li class="chapter" data-level="4" data-path="the-scientific-process.html"><a href="the-scientific-process.html"><i class="fa fa-check"></i><b>4</b> The scientific process</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#stages"><i class="fa fa-check"></i><b>4.1</b> Stages in the scientific process</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="the-scientific-process.html"><a href="the-scientific-process.html#observations"><i class="fa fa-check"></i><b>4.1.1</b> Observations</a></li>
+<li class="chapter" data-level="4.1.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#questions"><i class="fa fa-check"></i><b>4.1.2</b> Questions</a></li>
+<li class="chapter" data-level="4.1.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypotheses"><i class="fa fa-check"></i><b>4.1.3</b> Hypotheses</a></li>
+<li class="chapter" data-level="4.1.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#predictions"><i class="fa fa-check"></i><b>4.1.4</b> Predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="the-scientific-process.html"><a href="the-scientific-process.html#hypothesis-testing"><i class="fa fa-check"></i><b>4.2</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="4.3" data-path="the-scientific-process.html"><a href="the-scientific-process.html#are-we-sure"><i class="fa fa-check"></i><b>4.3</b> Don’t we ever know anything for sure?</a></li>
+<li class="chapter" data-level="4.4" data-path="the-scientific-process.html"><a href="the-scientific-process.html#further-reading"><i class="fa fa-check"></i><b>4.4</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-and-variables.html"><a href="data-and-variables.html"><i class="fa fa-check"></i><b>5</b> Data and variables</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-and-variables.html"><a href="data-and-variables.html#observations-on-material-and-obvious-things"><i class="fa fa-check"></i><b>5.1</b> “Observations on material and obvious things”</a></li>
+<li class="chapter" data-level="5.2" data-path="data-and-variables.html"><a href="data-and-variables.html#var-types"><i class="fa fa-check"></i><b>5.2</b> Revision: Types of variable</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-and-variables.html"><a href="data-and-variables.html#nominal-categorical-variables"><i class="fa fa-check"></i><b>5.2.1</b> Nominal (categorical) variables</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-and-variables.html"><a href="data-and-variables.html#ordinal-categorical-data"><i class="fa fa-check"></i><b>5.2.2</b> Ordinal (categorical) data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-and-variables.html"><a href="data-and-variables.html#interval-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.3</b> Interval scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-and-variables.html"><a href="data-and-variables.html#ratio-scale-numeric-variables"><i class="fa fa-check"></i><b>5.2.4</b> Ratio scale (numeric) variables</a></li>
+<li class="chapter" data-level="5.2.5" data-path="data-and-variables.html"><a href="data-and-variables.html#which-is-best"><i class="fa fa-check"></i><b>5.2.5</b> Which is best?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-and-variables.html"><a href="data-and-variables.html#accuracy-precision"><i class="fa fa-check"></i><b>5.3</b> Accuracy and precision</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-and-variables.html"><a href="data-and-variables.html#what-do-they-mean"><i class="fa fa-check"></i><b>5.3.1</b> What do they mean?</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-and-variables.html"><a href="data-and-variables.html#implied-precision---significant-figures"><i class="fa fa-check"></i><b>5.3.2</b> Implied precision - significant figures</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-and-variables.html"><a href="data-and-variables.html#how-precise-should-measurements-be"><i class="fa fa-check"></i><b>5.3.3</b> How precise should measurements be?</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-and-variables.html"><a href="data-and-variables.html#error-bias-and-prejudice"><i class="fa fa-check"></i><b>5.3.4</b> Error, bias and prejudice</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="learning-from-data.html"><a href="learning-from-data.html"><i class="fa fa-check"></i><b>6</b> Learning from data</a><ul>
+<li class="chapter" data-level="6.1" data-path="learning-from-data.html"><a href="learning-from-data.html#populations"><i class="fa fa-check"></i><b>6.1</b> Populations</a></li>
+<li class="chapter" data-level="6.2" data-path="learning-from-data.html"><a href="learning-from-data.html#learning-about-populations"><i class="fa fa-check"></i><b>6.2</b> Learning about populations</a></li>
+<li class="chapter" data-level="6.3" data-path="learning-from-data.html"><a href="learning-from-data.html#morph-example"><i class="fa fa-check"></i><b>6.3</b> A simple example</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sampling-error.html"><a href="sampling-error.html"><i class="fa fa-check"></i><b>7</b> Sampling error</a><ul>
+<li class="chapter" data-level="7.1" data-path="sampling-error.html"><a href="sampling-error.html#sampling-error-1"><i class="fa fa-check"></i><b>7.1</b> Sampling error</a></li>
+<li class="chapter" data-level="7.2" data-path="sampling-error.html"><a href="sampling-error.html#sampling-distributions"><i class="fa fa-check"></i><b>7.2</b> Sampling distributions</a></li>
+<li class="chapter" data-level="7.3" data-path="sampling-error.html"><a href="sampling-error.html#the-effect-of-sample-size"><i class="fa fa-check"></i><b>7.3</b> The effect of sample size</a></li>
+<li class="chapter" data-level="7.4" data-path="sampling-error.html"><a href="sampling-error.html#the-standard-error"><i class="fa fa-check"></i><b>7.4</b> The standard error</a></li>
+<li class="chapter" data-level="7.5" data-path="sampling-error.html"><a href="sampling-error.html#what-is-the-point-of-all-this"><i class="fa fa-check"></i><b>7.5</b> What is the point of all this!?</a></li>
+</ul></li>
+<li class="part"><span><b>Statistical Concepts (II)</b></span></li>
+<li class="part"><span><b>Simple Parametric Statistics</b></span></li>
+<li class="part"><span><b>Evaluating Associations</b></span></li>
+<li class="part"><span><b>Comparing Means</b></span></li>
+<li class="part"><span><b>Experimental Design</b></span></li>
+<li class="part"><span><b>Miscellaneous Topics</b></span></li>
+<li class="appendix"><span><b>Supplementary Material</b></span></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">APS 240: Data Analysis and Statistics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="learning-from-data" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Learning from data</h1>
+<blockquote>
+<p>Statistics is the science of learning from data, and of measuring, controlling, and communicating uncertainty; and it thereby provides the navigation essential for controlling the course of scientific and societal advances</p>
+<p><a href="https://doi.org/10.1126/science.1218685">Davidian and Louis (2012)</a></p>
+</blockquote>
+<p>The particular flavour of statistics we use in this course is called ‘<strong>frequentist statistics</strong>’. It isn’t hugely important that you remember that phrase, or indeed, from a practical perspective, that you even know you’re using frequentist statistics. You can apply the tools by just learning a few besic ‘rules’. Nonetheless, if you’re the kind of person who likes to understand how things properly, it is useful to at least get a rough sense of how frequentist ideas works. The goal of this, and the next few chapters, is to provide such an overview.</p>
+<p>We’re going to avoid all of the challenging mathematics that underlies this, and try to focus instead on the important concepts. That doesn’t mean the ideas are simple. It’s <em>not</em> critical for all of this to make perfect sense. You certainly won’t be assessed on your ability to explain how frequentist statistics works. However, if you can wrap your head around the core ideas you will find it easier to understand the output from the various statistical tests we’ll learn later.</p>
+<p>We’re going to start, in this chapter, by laying out a somewhat simplified overview of the steps involved in ‘doing frequentist statistics’. We’ll also introduce a few key ideas and definitions along the way. Later chapters will drill down into the really important ideas—things like sampling variation, standard errors, null hypotheses and <em>p</em>-values. These are the concepts we really need to understand.</p>
+<div id="populations" class="section level2">
+<h2><span class="header-section-number">6.1</span> Populations</h2>
+<p>When a biologist talks about a population they mean a group of individuals of the same species who interbreed. This definition, or at least something similar, should be familiar to you. What does a statistician mean when they talk about populations? The word has a different meaning in statistics. Indeed, it is a much more abstract concept: a statistical population is any group of items that share certain attributes or properties. This is best understood by example…</p>
+<ul>
+<li><p>The readers of this book could be viewed as a statistical population. APS students have a common interest in biology, they are mostly in their late teens and early 20s, and they tend to have similar educational backgrounds and career aspirations. As a consequence of these similarities, APS students tend to be more similar to one another than they would be to a randomly chosen inhabitant of the UK.</p></li>
+<li><p>The different areas of peatland in the UK comprise a statistical population. There are many peatland sites in the UK, and although their ecology varies somewhat from one location to the next, they are also very similar in many respects. For example, all peatland is generally characterised by low-growing vegetation (blank bog, etc) and acidic soils. If you visit two different peatland sites in the UK, they will seem quite similar compared to, for example, a neighbouring calcareous grassland (think of the Peak district).</p></li>
+<li><p>A population of plants or animals—as understood by biologists—can also be thought of as a statistical population. Indeed, this is often the kind of population organismal biologists are most interested in. The individuals that comprise a biological population share common behaviours, physiology and life history characteristics. Much of organismal biology is concerned with learning about these properties of organisms, often with the goal to explaining the variation we see among individuals.</p></li>
+</ul>
+<p>Populations are conceptualised as fixed but unknown quantities within the framework of frequentist statistics. The goal of an analysis is to learn something about populations by collecting data.</p>
+<p>Note that ‘the population’ is defined by the investigator, and the ‘something we want to learn about’ is anything we’re interested in and know how to measure. Consider the examples again. A social scientist might be interested in understanding the political attitudes of undergraduates, so they might choose to survey a group of students in their university. A climate change scientist might measure the mass carbon is stored in peatland areas at sites across Scotland and northern England. A behavioural ecologist might want to understand how much time beavers spend foraging for food, so they might study one of the two Scottish populations.</p>
+<p>What are the steps involved in these kinds of studies?</p>
+</div>
+<div id="learning-about-populations" class="section level2">
+<h2><span class="header-section-number">6.2</span> Learning about populations</h2>
+<p>The examples discussed above involve very different kinds of populations and questions. Nonetheless, there are fundamental commonalities in how these questions are addressed, which involve collecting data and applying the appropriate statistical tools. The process can be broken down into a number of distinct steps:</p>
+<p><strong>Step 1: Refine your questions, hypotheses and predictions</strong></p>
+<p>This step was discussed in <a href="the-scientific-process.html#the-scientific-process">The scientific process</a> chapter so there’s no need to go over it again here. The key point to keep in mind is that we should not start collecting data until we’ve set out the relevant questions, hypotheses and predictions. This might seem blindingly obvious, but it is surprising how often people don’t get these things straight before diving into data collection. Take our word for it, collecting data without a clear scientific objective and rational for the work is a guaranteed way to waste your time.</p>
+<p><strong>Step 2: Decide which population(s) is (are) important</strong></p>
+<p>The second step is to decide which population (or populations) we need to study. This is a more subtle problem than you might think. What constitutes ‘the population’ might be fairly obvious in some kinds of study, e.g. observational studies that don’t involve an experimental approach. In each of the three cases considered above, the corresponding populations we choose to study could be undergraduate students in APS, peatland habitats from across the UK, and beavers in Scotland, respectively.</p>
+<p>But what happens if we’re planning an experiment? Imagine we want to test the prediction that nutrient addition reduces biodiversity in chalk grasslands. We could set up an experiment where we have two kinds of plots: 1) manipulated plots where we add fertiliser, and 2) control plots where we do nothing. Comparing these would allow us to assess the impact of adding nutrients on biodiversity. There are two statistical populations in this setting—control and manipulated communities, which <em>are defined by the experimental design</em> we adopted. The nutrient addition plots doesn’t exist until you do the experiment, and even then, we want to be able to generalise our results beyond the one experiment. The weird mental contortion that a frequentist does is to imagine that the experimental plots are part of some larger, unobserved population of nutrient addition plots.</p>
+<p>Don’t worry too much if that is confusing (it is!). The important point is that, for any given problem, a relevant statistical population is something the investigator defines. It might be ‘real’, like the undergraduates in APS, or they might be something that doesn’t even exist in a meaningful way, like a population of not-yet-realised experimentally manipulated plots. In either case, we can use the same statistical techniques to learn about ‘the populations’.</p>
+<p><strong>Step 3: Decide which variables to study</strong></p>
+<p>The next step is to decide which features of the population we need to measure to address our question. In practise, this comes down to deciding which variable (or variables) we need to measure. In the examples above, the appropriate variables might be things like a standardised measure of political attitude, the mass of carbon stored per unit area, or the body mass of individuals in the biological population.</p>
+<p>This step is often reasonably straightforward, though some effort may be required to pick among different options. There isn’t a whole of ambiguity associated with a physical variable like body mass, but something like ‘political attitude’ needs careful thought. Can we quantify this by studying just one thing, like voting patterns? Probably not.</p>
+<p>Part of the art of designing a good data collection protocol is deciding what to measure. We discussed some of the considerations in the <a href="data-and-variables.html#data-and-variables">Data and variables</a> chapter, but what really matters most is that we choose the right kind of variables to address the substantive research question.</p>
+<p><strong>Step 4: Decide which population parameters are relevant</strong></p>
+<p>Once we have decided which variable(s) to study, we have to decide which ‘population parameter’ is relevant. A population parameter is simply a numeric quantity that describes a particular aspect of the variable(s) in the population. Actually, to be more precise, it describes a feature of the distribution of the variable(s) in the population.</p>
+<p>A simple population parameter you are familiar with is the population mean. We often study means, because they allows us to answer questions like, “how much, on average, of something is present?”. Much of this course is about asking questions of population means, though other population parameters may also be important, e.g.</p>
+<ul>
+<li><p>The goal of statistical genetics is to partition variablity among individuals—we want to know how much phenotypic variation is due to genetic vs. non-genetic sources. In this case, it is population variances we want to learn about.</p></li>
+<li><p>Sometimes we want to understand how two or more aspects of the population are related to one another. In this situation a correlation coefficient (more about this later) might be the right population parameter to focus on.</p></li>
+</ul>
+<p><strong>Step 5: Gather a representative sample</strong></p>
+<p>If we could measure every object in a population we wouldn’t need to use statistics. We could just calculate the quantity we needed using an exhaustive sample and we’d have our answer. In the real world we are faced with resource constraints, i.e. we have limited time and money to invest in a problem, no matter how important it is. This means we have to work with a <strong>sample</strong> of a population.</p>
+<p>A sample is just a subset of the wider population, which has been chosen so that it is representative of that population. That word ‘representative’ is very important. If we can’t collect a representative sample it will be very difficult to infer anything useful about the population it came from. For example, if we aim to understand the reproductive characteristics of our favourite study organism, but we only sample young or old individuals, it will be impossible to generalise our findings if reproductive performance changes with age (which is almost always true).</p>
+<p>The study of how to generate useful samples from a population is an important part of statistics. It falls under the banners of experimental design and sampling theory. These are large, quite technical topics, so it is well beyond the scope of this course to study them in any great deal. Nonetheless, we will touch on a few of the more important practical aspects as we move through this course, particularly in the [Experimental design] chapter.</p>
+<p><strong>Step 6: Estimate the population parameter(s)</strong></p>
+<p>Once we have a representative sample from a population we can calculate something called a <strong>point estimate</strong> of the population parameter. Remember, the population parameter is unknown; that’s why we collect samples. A point estimate is simply a number that represents our “best guess” at the true value of the parameter. For example, if we are interested in a population mean of a variable, then the obvious point estimate to use is the mean of the sample (this is just “the average” you learned how to calculate in school).</p>
+<p>By the way, people often just say/write “estimate” instead of “point estimate”, for the simple reason that using “point estimate” all the time is tedious. The exact terminology isn’t really all that important to be honest. We’ll mostly use the word “estimate” from now on.</p>
+<p><strong>Step 7: Quantify the uncertainty of estimate(s)</strong></p>
+<p>A point estimate is virtually useless on its own. Why? Because it is always derived from a limited sample of the wider population. Even if we are very careful about how we sample a population, and we collect a really big sample, there is no way to guarantee that the composition of the sample exactly matches that of the population. Why is this important? It means that any point estimate we derive from a sample will always be imperfect, in the sense that it won’t exactly match the true population value.</p>
+<p>So… there is always uncertainty associated with an estimate of a population parameter. What can we do about this? We have to find a way to <em>quantify that uncertainty</em>. This bit of the process can be tricky to understand. We’re going to spend a fair bit of time thinking about it in the [Sampling variation and standard error] chapter, so we’ll leave it there for now.</p>
+<p><strong>Step 8: Answer the question!</strong></p>
+<p>Once we have point estimates and measures of uncertainty we’re in a position to start answering questions. We have to be very careful about how we go about this though.</p>
+<p>Let’s say we want to answer a seemingly simple question, such as, “Are there more than 200 tonnes of carbon per hectare stored in the peatland of the Peak District?” We could go out and sample a number of sites, measure the stored carbon at each site, and then calculate the mean of these measurements. What can we conclude if that sample mean is 210 t h<sup>-1</sup>? Not much, at least not until we have a sense of how reliable that mean is likely to be. To answer our question, we have to know how to assess whether or not the difference we observe (210 - 200 = 10) was just a fluke.</p>
+<p>The tools we’ll learn about in this course are designed to answer a range of different kinds of scientific question. Nonetheless, they all boil down to the same basic question: Is the pattern I see ‘real’, or is it instead likely to be a result of chance variation? To tackle this, we combine point estimates and measures of uncertainty in various ways. The good news is that statistical software like R will do all the hard work for us. We just have to learn how to understand what is happening and interpret the results it gives us.</p>
+</div>
+<div id="morph-example" class="section level2">
+<h2><span class="header-section-number">6.3</span> A simple example</h2>
+<p>The best way to begin getting some sense of how all this fits together is by working through an example. We’ll finish this chapter by introducing an example that we’ll come back to in later chapters. We’ll just skim through steps 1-6 here. The final two steps are sufficiently tricky that they need their own chapters.</p>
+<p>Imagine we are working on a plant species that is phenotypically polymorphic. There are two different ‘morphs’, a purple morph and a green morph. We can depict this situation visually with a map showing where the purple and green plants are located on a hypothetical landscape:</p>
+<div class="figure" style="text-align: center"><span id="fig:plants-all"></span>
+<img src="stats-for-bio_files/figure-html/plants-all-1.png" alt="Stylised landscape showing a population of purple and green plants" width="50%" />
+<p class="caption">
+Figure 6.1: Stylised landscape showing a population of purple and green plants
+</p>
+</div>
+<p>These idealised data were generated using a simulation in R. The details of how we did this aren’t important, but basically, we placed ‘individuals’ onto the landscape at random locations (every location is equally likely), and then assigned them purple morph status with a certain probability (we made them are green otherwise). We’ll come back to the probability we actually used in the next chapter. Let’s proceed as though this were a real situation…</p>
+<p><strong>Step 1: Refine your questions, hypotheses and predictions</strong></p>
+<p>Imagine we had previously been studying a neighbouring population that exhibits the same polymorphism. We’re fairly sure both populations were once connected, but habitat loss over the last few hundred years has significantly reduced gene flow between them. Our studies with the neighbouring population have shown that…</p>
+<ul>
+<li><p>The colour polymorphism is controlled by a single gene with two alleles: a recessive mutant allele (‘P’) confers the purple colour, and the dominant wild-type allele (‘G’) makes plants green. Population genetic studies have shown that the two alleles are present in a ratio of about 1:1.</p></li>
+<li><p>There seems to be no observable fitness difference between the two morphs in the neighbouring population. What’s more, about 25% of plants are purple, i.e. the alleles seem to be in <a href="https://en.wikipedia.org/wiki/Hardy–Weinberg_principle">Hardy-Weinberg equilibrium</a>. These two observations indicate that there is no selection operating on the polymorphism (it’s ‘neutral’).</p></li>
+</ul>
+<p>Things are different in the new study population. The purple morph seems to be about as common as the green morph. What’s more, some preliminary work indicates that purple plants seem to produce more seeds than green plants. Our hypothesis is, therefore, that purple plants have a selective advantage in the new study population. The corresponding prediction is that the frequency of the purple morph will be greater than 25% in the new study population, as selection should be driving the ‘P’ allele to fixation.</p>
+<p>(This isn’t the strongest test of our hypothesis by the way. Really, we need to study allele and genotype frequencies, not just phenotypes. Sadly, since Brexit happened, the government has pulled the research funding for genetic research on plant polymorphism, so this is the best we can do)</p>
+<p><strong>Step 2: Decide which population is important</strong></p>
+<p>Our situation is made up, so questions about the statistical population are not hugely relevant to be honest. In reality, we would consider various factors, such as whether we can study the whole population or need to restrict ourselves to a smaller scale (e.g. to one sub-population). Working at a large scale should produce a more general result, but it could also present a significant logistical challenge.</p>
+<p><strong>Step 3: Decide which variables to study</strong></p>
+<p>This step is easy in this example. We could measure all kinds of different attributes of our plants—biomass, height, seed production, etc—but to study the polymorphism, we only need to collect information about the colour of different individuals. This means we are going to be working with a nominal (i.e. categorical) variable, which takes two values: ‘purple’ or ‘green’.</p>
+<p><strong>Step 4: Decide which population parameters are relevant</strong></p>
+<p>The prediction we want to test is about the purple morph frequency (or equivalently, the percentage, or proportion, of purple plants). Therefore, the relevant population parameter is the frequency of purple morphs in the wider population. We need to collect ‘data’ so that we can learn about this unknown quantity.</p>
+<p><strong>Step 5: Gather a representative sample</strong></p>
+<p>A representative sample here is one in which every individual on the landscape has the same probability of being sampled (i.e. a ‘random sample’). Gathering a random sample of organisms from across a landscape is surprisingly hard to do in reality, but it is at least easy to do in a simulation. Let’s seen what happens if we sample 20 plants at random…</p>
+<div class="figure" style="text-align: center"><span id="fig:plants-samp1"></span>
+<img src="stats-for-bio_files/figure-html/plants-samp1-1.png" alt="Sampling plants. Sampled plants are circled in red" width="50%" />
+<p class="caption">
+Figure 6.2: Sampling plants. Sampled plants are circled in red
+</p>
+</div>
+<p>The new plot shows the original population of plants, only this time we’ve circled the sampled individuals in red.</p>
+<p><strong>Step 6: Estimate the population parameter</strong></p>
+<p>Estimating a frequency from a sample is simple enough. We can express a frequency in different ways. Let’s use a percentage. We found 13 green plants and 7 purple plants in our sample, which means our point estimate of the purple morph frequency is 35%. This is certainly greater than 25%—the value of observed in the original population—but it isn’t that far off.</p>
+<p>Maybe the purple plants aren’t at a selective advantage after all? Or maybe they are? We’ll eventually see how to use a statistical test to rigorously evaluate our prediction. First we need to learn a few more concepts. Time to learn about something called sampling error…</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-and-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sampling-error.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/1_03_learning_data.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"split_by": "section"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
