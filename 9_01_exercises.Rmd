@@ -842,7 +842,7 @@ If there were significant effects in the ANOVA summarise the differences between
 ```{block, type='do-something'}
 **MOLE question**
 
-What does the analysis suggest about the osmoregulation of *Acmaea*.
+What does the analysis suggest about the osmoregulation of *Acmaea*?
 ```
 
 Finally, see if you can prepare the following "publication quality" plot to summarise the results:
