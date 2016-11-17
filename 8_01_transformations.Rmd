@@ -8,24 +8,24 @@ Up until now, the data we've examined have conformed, at least roughly, to the a
 
 -   Variances may be unequal among groups.
 
-The same kinds of problems with these **distributional assumptions** can also arise when working in a regression (i.e. non-normal residuals, non-constant variance). Furthermore, we might run into additional problems if there is some kind of non-linearity in the relationship between the dependent and independent (numeric) variables.
+The same kinds of problems with these **distributional assumptions** can also arise when working on a regression (i.e. non-normal residuals, non-constant variance). Furthermore, we might run into additional problems if there is some kind of non-linearity in the relationship between the dependent and independent (numeric) variables.
 
-Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that *t*-tests, ANOVA’s and regressions are generally quite robust---they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances changes a lot across groups.
+Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that *t*-tests, ANOVAs and regressions are generally quite robust---they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances changes a lot across groups.
 
-In these cases steps may need to be taken to deal with the problem. This chapter deals with one way of tackling the analysis of data that don’t fit the assumptions: **data transformation**. We will mostly focus on ANOVA / *t*-test setting, but keep in mind that the ideas are equally applicable to regression analysis.
+In these cases steps may need to be taken to deal with the problem. This chapter deals with one way of tackling the analysis of data that don’t fit the assumptions: **data transformation**. We will mostly focus on the ANOVA / *t*-test setting, but keep in mind that the ideas are equally applicable to regression analysis.
 
 ## Data transformation: ANOVAs and *t*-tests {#ant-eg}
 
 ### The data: foraging in ants 
 
-```{r}
+```{r, echo = FALSE}
 ants <- read.csv("./data_csv/ANTS1.CSV")
 ```
 
-Red wood ants, *Formica rufa*, forage for food (mainly insects and ‘honeydew’ produced by aphids) both on the ground and in the canopies of trees. Rowan, oak and sycamore support very different communities of insect herbivores (including aphids) and it would be interesting to know whether the foraging efficiency of ant colonies is affected by the type of trees available to them. As part of an investigation of the foraging of *Formica rufa* observations were made of the prey being carried by ants down trunks of rowan, oak and sycamore trees. The total biomass of prey being transported was measured over a 30 minute sampling period and the data were expressed as the biomass (dry weight in mg) of prey divided by the total number of ants leaving the tree to give the rate of food collection per ant per half hour. Observations were made on 28 rowan, 26 sycamore, and 27 oak trees.
+Red wood ants, *Formica rufa*, forage for food (mainly insects and ‘honeydew’ produced by aphids) both on the ground and in the canopies of trees. Rowan, oak and sycamore support very different communities of insect herbivores (including aphids) and it would be interesting to know whether the foraging efficiency of ant colonies is affected by the type of trees available to them. As part of an investigation of the foraging of *Formica rufa*, observations were made of the prey being carried by ants down trunks of rowan, oak and sycamore trees. The total biomass of prey being transported was measured over a 30 minute sampling period and the data were expressed as the biomass (dry weight in mg) of prey divided by the total number of ants leaving the tree to give the rate of food collection per ant per half hour. Observations were made on 28 rowan, 26 sycamore, and 27 oak trees.
 
 ```{block, type='do-something'}
-**Walk through**
+**Walk through example**
 
 Work through the ants example.
 ```
@@ -78,7 +78,7 @@ plot(ant_mod, which = 3)
 ```
 This shows that the variance increases with the fitted values---it looks like there is also a problem with the constant variance assumption. Again, this pattern is very common in biological data.
 
-In the light of these evaluations, we have three options …
+In the light of these evaluations, we have three options...
 
 1.  To carry on and carry out an ANOVA anyway---hoping that the violation of the assumptions won’t matter too much.
 
@@ -103,16 +103,16 @@ Based on these results, it looks like there is a highly significant difference i
 
 The 'carry on anyway' strategy can often be justified if we just need to compare the sample means of two groups because in this situation we can use a two-sample *t*-test rather than an ANOVA. By default R uses a version of the *t*-test that allows for unequal sample variances. This at least deals with one potential problem. The *t*-test is also fairly robust to violations of the normality assumption when the sample sizes are small, and when the sample sizes are large, the normality assumption matters even less.
 
-The ability to do a *t*-test which doesn’t require equal variances is extremely useful. A word of warning though: some people advise carrying out a statistical test of equal variance, and if the variances are deemed not to be significantly different, using the version of a two-sample *t*-test that assumes equal variances. This is not good advise. Following this procedure leads to less reliable *p*-values. The reason for this effect is somewhat technical, but trust us, this procedure is not good statistical practise.
+The ability to do a *t*-test which doesn’t require equal variances is extremely useful. A word of warning though: some people advise carrying out a statistical test of equal variance, and if the variances are deemed not to be significantly different, using the version of a two-sample *t*-test that assumes equal variances. This is not good advice. Following this procedure leads to less reliable *p*-values. The reason for this effect is somewhat technical, but trust us, this procedure is not good statistical practice.
 ```
 
 ## Transforming the data {#transform}
 
-One approach to dealing with difficult data is to apply a mathematical function to it to make the transformed data fits the model assumptions better: a process called *data transformation*. This may sound a bit dubious, but it is a perfectly valid procedure that will often allow us to use the statistical model we want to even if the data don’t initially fit the assumptions. The key thing to keep in mind is that the transformatoin should be applied to the *dependent variable*. 
+One approach to dealing with difficult data is to apply a mathematical function to it to make the transformed data fit the model assumptions better: a process called *data transformation*. This may sound a bit dubious, but it is a perfectly valid procedure that will often allow us to use the statistical model we want to even if the data don’t initially fit the assumptions. The key thing to keep in mind is that the transformation should be applied to the *dependent variable*. 
 
 ### The logarithmic transformation
 
-let's try a simple transformation on the food collection rate variabe in the ant data set. Instead of using the original numbers we will convert them to their logarithms. We can use common logs (logs to the base 10, written log$_{10}$) or natural logs (logs to the base, written log$_{e}$ or ln). It doesn't matter: they have exactly the same effect on the data in terms of making it meet the assumptions of ANOVA (or not).
+Let's try a simple transformation on the food collection rate variable in the ant data set. Instead of using the original numbers we will convert them to their logarithms. We can use common logs (logs to the base 10, written log$_{10}$) or natural logs (logs to the base *e*, written log$_{e}$ or ln). It doesn't matter: they have exactly the same effect on the data in terms of making it meet the assumptions of ANOVA (or not).
 
 Applying a log transform is quick and easy in R---there are built in functions to take common logs and natural logs, called `log10` and `log`, respectively. We'll use `mutate` to add a new variable, which is the common log of `Food`:
 ```{r}
